@@ -1,120 +1,67 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BE.Domain.Entities
 {
     /// <summary>
-    /// Entity model for geographical data (database table).
+    /// Entity model for geographical data representing Dutch address and building information.
     /// </summary>
-    [Table("GeographicalData")]
     public class GeographicalDataEntity
     {
-        /// <summary>Unique identifier.</summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>Street name or public space.</summary>
-        [Required, StringLength(200)]
-        [Column("openbareruimte")]
         public string Openbareruimte { get; set; } = string.Empty;
 
-        /// <summary>House number.</summary>
-        [Required]
-        [Column("huisnummer")]
         public int Huisnummer { get; set; }
 
-        /// <summary>House letter (optional).</summary>
-        [StringLength(1)]
-        [Column("huisletter")]
+        /// <summary>House letter (e.g., 'A' in '123A').</summary>
         public string? Huisletter { get; set; }
 
-        /// <summary>House number addition (optional).</summary>
-        [Column("huisnummertoevoeging")]
+        /// <summary>House number addition (e.g., 1 in '123-1').</summary>
         public int? Huisnummertoevoeging { get; set; }
 
-        /// <summary>Postal code.</summary>
-        [Required, StringLength(10)]
-        [Column("postcode")]
         public string Postcode { get; set; } = string.Empty;
-
-        /// <summary>City or town.</summary>
-        [Required, StringLength(100)]
-        [Column("woonplaats")]
         public string Woonplaats { get; set; } = string.Empty;
-
-        /// <summary>Municipality.</summary>
-        [StringLength(100)]
-        [Column("gemeente")]
         public string Gemeente { get; set; } = string.Empty;
-
-        /// <summary>Province.</summary>
-        [StringLength(100)]
-        [Column("provincie")]
         public string Provincie { get; set; } = string.Empty;
 
-        /// <summary>Address indication number.</summary>
-        [StringLength(100)]
-        [Column("nummeraanduiding")]
+        /// <summary>BAG address indication number (Dutch address registry identifier).</summary>
         public string Nummeraanduiding { get; set; } = string.Empty;
 
-        /// <summary>Usage purpose of the residence.</summary>
-        [StringLength(100)]
-        [Column("verblijfsobjectgebruiksdoel")]
+        /// <summary>Usage purpose (e.g., residential, commercial, mixed-use).</summary>
         public string Verblijfsobjectgebruiksdoel { get; set; } = string.Empty;
 
-        /// <summary>Surface area of the residence.</summary>
-        [Column("oppervlakteverblijfsobject")]
+        /// <summary>Surface area in square meters.</summary>
         public int Oppervlakteverblijfsobject { get; set; }
 
-        /// <summary>Status of the residence.</summary>
-        [StringLength(100)]
-        [Column("verblijfsobjectstatus")]
+        /// <summary>Status of the residence (e.g., active, inactive, planned).</summary>
         public string Verblijfsobjectstatus { get; set; } = string.Empty;
 
-        /// <summary>Object ID.</summary>
-        [StringLength(100)]
-        [Column("objectid")]
+        /// <summary>BAG object identifier.</summary>
         public string ObjectId { get; set; } = string.Empty;
 
-        /// <summary>Object type.</summary>
-        [StringLength(100)]
-        [Column("objecttype")]
+        /// <summary>BAG object type (e.g., Pand, Verblijfsobject).</summary>
         public string ObjectType { get; set; } = string.Empty;
 
         /// <summary>Secondary address (optional).</summary>
-        [StringLength(100)]
-        [Column("nevenadres")]
         public string? Nevenadres { get; set; }
 
-        /// <summary>Building ID.</summary>
-        [StringLength(100)]
-        [Column("pandid")]
+        /// <summary>BAG building identifier.</summary>
         public string Pandid { get; set; } = string.Empty;
 
-        /// <summary>Building status.</summary>
-        [StringLength(100)]
-        [Column("pandstatus")]
+        /// <summary>Building status (e.g., existing, under construction, demolished).</summary>
         public string Pandstatus { get; set; } = string.Empty;
 
-        /// <summary>Year of construction.</summary>
-        [Column("pandbouwjaar")]
         public int Pandbouwjaar { get; set; }
 
-        /// <summary>X coordinate.</summary>
-        [Column("x")]
+        /// <summary>X coordinate (RD New coordinate system).</summary>
         public int X { get; set; }
 
-        /// <summary>Y coordinate.</summary>
-        [Column("y")]
+        /// <summary>Y coordinate (RD New coordinate system).</summary>
         public int Y { get; set; }
 
-        /// <summary>Longitude.</summary>
-        [Column("lon")]
+        /// <summary>Longitude (WGS84 decimal degrees).</summary>
         public double Lon { get; set; }
 
-        /// <summary>Latitude.</summary>
-        [Column("lat")]
+        /// <summary>Latitude (WGS84 decimal degrees).</summary>
         public double Lat { get; set; }
     }
 }
