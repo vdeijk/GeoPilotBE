@@ -6,6 +6,10 @@
 *.db
 *.db-*
 
+# Sensitive configuration files
+appsettings*.json
+*/appsettings*.json
+
 bin/
 obj/
 

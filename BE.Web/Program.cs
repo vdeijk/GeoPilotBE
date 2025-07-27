@@ -5,6 +5,8 @@ using BE.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAutoMapper(typeof(BE.Services.GeographicalDataProfile));
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var databaseProvider = builder.Configuration.GetValue<string>("DatabaseProvider", "SQLite");
 
@@ -62,14 +64,24 @@ builder.Services.AddHttpsRedirection(options =>
     }
 });
 
+var corsSection = builder.Configuration.GetSection("Cors:AllowAngularApp");
+var allowedOrigins = corsSection.GetSection("Origins").Get<string[]>();
+var allowAnyMethod = corsSection.GetValue<bool>("AllowAnyMethod", true);
+var allowAnyHeader = corsSection.GetValue<bool>("AllowAnyHeader", true);
+var allowCredentials = corsSection.GetValue<bool>("AllowCredentials", true);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "https://localhost:4200")
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
+        if (allowedOrigins != null && allowedOrigins.Length > 0)
+            policy.WithOrigins(allowedOrigins);
+        if (allowAnyMethod)
+            policy.AllowAnyMethod();
+        if (allowAnyHeader)
+            policy.AllowAnyHeader();
+        if (allowCredentials)
+            policy.AllowCredentials();
     });
 });
 
@@ -142,7 +154,6 @@ using (var scope = app.Services.CreateScope())
             var connectionStringForLog = connectionString ?? Path.Combine("BE.Data", "Data", "geodata.db");
             logger.LogInformation("Attempting to connect to SQLite database at: {DatabasePath}", connectionStringForLog);
             
-            // Extract the actual file path from the connection string
             var dbFilePath = connectionStringForLog;
             if (connectionStringForLog.StartsWith("Data Source="))
             {

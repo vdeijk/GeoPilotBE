@@ -1,11 +1,11 @@
-﻿using System.Globalization;
+using System.Globalization;
 using CsvHelper;
 using Microsoft.EntityFrameworkCore;
 using BE.Data;
 using BE.Domain.Entities;
 using BE.Domain.Models;
 
-namespace DataImporter;
+namespace BE.DataImporter;
 
 class Program
 {

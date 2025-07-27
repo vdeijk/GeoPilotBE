@@ -3,6 +3,7 @@ using BE.Domain.Interfaces;
 using BE.Domain.Models;
 using BE.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 namespace BE.Services
 {
@@ -11,12 +12,14 @@ namespace BE.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBusinessValidator _businessValidator;
         private readonly ILogger<GeographicalDataService> _logger;
+        private readonly IMapper _mapper;
 
-        public GeographicalDataService(IUnitOfWork unitOfWork, IBusinessValidator businessValidator, ILogger<GeographicalDataService> logger)
+        public GeographicalDataService(IUnitOfWork unitOfWork, IBusinessValidator businessValidator, ILogger<GeographicalDataService> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _businessValidator = businessValidator;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<GeographicalDataDto>> GetAllAsync()
@@ -148,69 +151,12 @@ namespace BE.Services
         }
 
         private GeographicalDataDto MapToDto(GeographicalDataEntity entity)
-        {
-            return new GeographicalDataDto
-            {
-                Id = entity.Id,
-                Openbareruimte = entity.Openbareruimte,
-                Huisnummer = entity.Huisnummer,
-                Huisletter = entity.Huisletter,
-                Huisnummertoevoeging = entity.Huisnummertoevoeging,
-                Postcode = entity.Postcode,
-                Woonplaats = entity.Woonplaats,
-                Gemeente = entity.Gemeente,
-                Provincie = entity.Provincie,
-                Nummeraanduiding = entity.Nummeraanduiding,
-                Verblijfsobjectgebruiksdoel = entity.Verblijfsobjectgebruiksdoel,
-                Oppervlakteverblijfsobject = entity.Oppervlakteverblijfsobject,
-                Verblijfsobjectstatus = entity.Verblijfsobjectstatus,
-                ObjectId = entity.ObjectId,
-                ObjectType = entity.ObjectType,
-                Nevenadres = entity.Nevenadres,
-                Pandid = entity.Pandid,
-                Pandstatus = entity.Pandstatus,
-                Pandbouwjaar = entity.Pandbouwjaar,
-                X = entity.X,
-                Y = entity.Y,
-                Lon = entity.Lon,
-                Lat = entity.Lat
-            };
-        }
+            => _mapper.Map<GeographicalDataDto>(entity);
 
         private GeographicalDataEntity MapToEntity(CreateGeographicalDataDto dto)
-        {
-            return new GeographicalDataEntity
-            {
-                Openbareruimte = dto.Openbareruimte,
-                Huisnummer = dto.Huisnummer,
-                Huisletter = dto.Huisletter,
-                Huisnummertoevoeging = dto.Huisnummertoevoeging,
-                Postcode = dto.Postcode,
-                Woonplaats = dto.Woonplaats,
-                Gemeente = dto.Gemeente,
-                Provincie = dto.Provincie,
-                Nummeraanduiding = dto.Nummeraanduiding,
-                Verblijfsobjectgebruiksdoel = dto.Verblijfsobjectgebruiksdoel,
-                Oppervlakteverblijfsobject = dto.Oppervlakteverblijfsobject,
-                Verblijfsobjectstatus = dto.Verblijfsobjectstatus,
-                ObjectId = dto.ObjectId,
-                ObjectType = dto.ObjectType,
-                Nevenadres = dto.Nevenadres,
-                Pandid = dto.Pandid,
-                Pandstatus = dto.Pandstatus,
-                Pandbouwjaar = dto.Pandbouwjaar,
-                X = dto.X,
-                Y = dto.Y,
-                Lon = dto.Lon,
-                Lat = dto.Lat
-            };
-        }
+            => _mapper.Map<GeographicalDataEntity>(dto);
 
         private GeographicalDataEntity MapToEntity(UpdateGeographicalDataDto dto)
-        {
-            var entity = MapToEntity((CreateGeographicalDataDto)dto);
-            entity.Id = dto.Id;
-            return entity;
-        }
+            => _mapper.Map<GeographicalDataEntity>(dto);
     }
 }
