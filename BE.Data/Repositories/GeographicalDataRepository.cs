@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BE.Data;
 using BE.Data.Interfaces;
 using BE.Data.Models;
-using BE.Data.DTOs;
 using BE.Data.Entities;
-using GeographicalDataModel = BE.Data.Entities.GeographicalDataEntity;
 
 namespace BE.Repositories
 {
@@ -31,38 +29,62 @@ namespace BE.Repositories
 
         public async Task<PagedResult<GeographicalDataEntity>> GetPagedAsync(PaginationParameters parameters)
         {
-            _logger.LogInformation("Retrieving paged geographical data: Page {Page}, Size {PageSize}, Search: {Search}", 
-                parameters.Page, parameters.PageSize, parameters.Search);
+            _logger.LogInformation(
+                "Retrieving paged geographical data: Page {Page}, Size {PageSize}, Filters => Openbareruimte: {Openbareruimte}, Postcode: {Postcode}, Woonplaats: {Woonplaats}, Huisnummer: {Huisnummer}, SortBy: {SortBy}, SortDirection: {SortDirection}",
+                parameters.Page,
+                parameters.PageSize,
+                parameters.Openbareruimte,
+                parameters.Postcode,
+                parameters.Woonplaats,
+                parameters.Huisnummer,
+                parameters.SortBy,
+                parameters.SortDirection);
 
             var query = _context.GeographicalData.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(parameters.Search))
+            // 🔎 Apply filters individually
+            if (!string.IsNullOrWhiteSpace(parameters.Openbareruimte))
             {
-                var searchTerm = parameters.Search.ToLower();
-                query = query.Where(g => 
-                    g.Openbareruimte.ToLower().Contains(searchTerm) ||
-                    g.Postcode.ToLower().Contains(searchTerm) ||
-                    g.Woonplaats.ToLower().Contains(searchTerm) ||
-                    g.Gemeente.ToLower().Contains(searchTerm));
+                var search = parameters.Openbareruimte.ToLower();
+                query = query.Where(g => g.Openbareruimte.ToLower().Contains(search));
             }
 
+            if (!string.IsNullOrWhiteSpace(parameters.Postcode))
+            {
+                var search = parameters.Postcode.ToLower();
+                query = query.Where(g => g.Postcode.ToLower().Contains(search));
+            }
+
+            if (!string.IsNullOrWhiteSpace(parameters.Woonplaats))
+            {
+                var search = parameters.Woonplaats.ToLower();
+                query = query.Where(g => g.Woonplaats.ToLower().Contains(search));
+            }
+
+            if (!string.IsNullOrWhiteSpace(parameters.Huisnummer))
+            {
+                var search = parameters.Huisnummer;
+                query = query.Where(g => g.Huisnummer.ToString().StartsWith(search));
+            }
+
+            // 🔄 Sorting
             if (!string.IsNullOrWhiteSpace(parameters.SortBy))
             {
                 query = parameters.SortBy.ToLower() switch
                 {
-                    "openbareruimte" => parameters.SortDirection == SortDirection.Descending 
+                    "openbareruimte" => parameters.SortDirection == SortDirection.Descending
                         ? query.OrderByDescending(g => g.Openbareruimte)
                         : query.OrderBy(g => g.Openbareruimte),
-                    "huisnummer" => parameters.SortDirection == SortDirection.Descending 
+                    "huisnummer" => parameters.SortDirection == SortDirection.Descending
                         ? query.OrderByDescending(g => g.Huisnummer)
                         : query.OrderBy(g => g.Huisnummer),
-                    "postcode" => parameters.SortDirection == SortDirection.Descending 
+                    "postcode" => parameters.SortDirection == SortDirection.Descending
                         ? query.OrderByDescending(g => g.Postcode)
                         : query.OrderBy(g => g.Postcode),
-                    "woonplaats" => parameters.SortDirection == SortDirection.Descending 
+                    "woonplaats" => parameters.SortDirection == SortDirection.Descending
                         ? query.OrderByDescending(g => g.Woonplaats)
                         : query.OrderBy(g => g.Woonplaats),
-                    "gemeente" => parameters.SortDirection == SortDirection.Descending 
+                    "gemeente" => parameters.SortDirection == SortDirection.Descending
                         ? query.OrderByDescending(g => g.Gemeente)
                         : query.OrderBy(g => g.Gemeente),
                     _ => query.OrderBy(g => g.Id)
@@ -80,17 +102,17 @@ namespace BE.Repositories
                 .Take(parameters.PageSize)
                 .ToListAsync();
 
-            _logger.LogInformation("Retrieved {Count} items out of {Total} total for page {Page}", 
+            _logger.LogInformation(
+                "Retrieved {Count} items out of {Total} total for page {Page}",
                 items.Count, totalCount, parameters.Page);
 
             return new PagedResult<GeographicalDataEntity>
             {
-                Items = items,
-                TotalCount = totalCount,
-                Page = parameters.Page,
-                PageSize = parameters.PageSize
-            };
-        }
+                        Items = items,
+                        TotalCount = totalCount
+                    };
+                }
+
 
         public async Task<GeographicalDataEntity?> GetByIdAsync(int id)
         {

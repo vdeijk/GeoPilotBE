@@ -20,23 +20,35 @@ public class PaginationParameters
 {
     private const int MaxPageSize = 100;
     private int _pageSize = 20;
-    
+
     [Range(1, int.MaxValue, ErrorMessage = "Page must be greater than 0")]
     public int Page { get; set; } = 1;
-    
+
     [Range(1, MaxPageSize, ErrorMessage = "PageSize must be between 1 and 100")]
     public int PageSize
     {
         get => _pageSize;
         set => _pageSize = Math.Clamp(value, 1, MaxPageSize);
     }
-    
-    [StringLength(100, ErrorMessage = "Search term cannot exceed 100 characters")]
-    public string? Search { get; set; }
-    
+
+    // 🔎 Individual search filters
+    [StringLength(100, ErrorMessage = "Openbareruimte cannot exceed 100 characters")]
+    public string? Openbareruimte { get; set; }
+
+    [StringLength(20, ErrorMessage = "Postcode cannot exceed 20 characters")]
+    public string? Postcode { get; set; }
+
+    [StringLength(100, ErrorMessage = "Woonplaats cannot exceed 100 characters")]
+    public string? Woonplaats { get; set; }
+
+    [StringLength(10, ErrorMessage = "Huisnummer cannot exceed 10 characters")]
+    public string? Huisnummer { get; set; }
+
+    // 🔄 Sorting
     public string? SortBy { get; set; }
     public SortDirection SortDirection { get; set; } = SortDirection.Ascending;
 }
+
 
 public enum SortDirection
 {

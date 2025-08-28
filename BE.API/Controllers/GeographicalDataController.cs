@@ -114,8 +114,16 @@ namespace BE.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<PagedResult<GeographicalDataDto>>> GetGeographicalDataPaged([FromQuery] PaginationParameters parameters)
         {
-            _logger.LogInformation("Retrieving geographical data - Page: {Page}, Size: {Size}, Search: {Search}, Sort: {SortBy} {SortDirection}", 
-                parameters.Page, parameters.PageSize, parameters.Search, parameters.SortBy, parameters.SortDirection);
+            _logger.LogInformation(
+                "Retrieving geographical data - Page: {Page}, Size: {Size}, Openbareruimte: {Openbareruimte}, Postcode: {Postcode}, Woonplaats: {Woonplaats}, Huisnummer: {Huisnummer}, Sort: {SortBy} {SortDirection}",
+                parameters.Page,
+                parameters.PageSize,
+                parameters.Openbareruimte,
+                parameters.Postcode,
+                parameters.Woonplaats,
+                parameters.Huisnummer,
+                parameters.SortBy,
+                parameters.SortDirection);
 
             var result = await _service.GetPagedAsync(parameters);
 
