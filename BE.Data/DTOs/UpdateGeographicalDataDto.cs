@@ -1,4 +1,4 @@
-namespace BE.Domain.DTOs
+namespace BE.Data.DTOs
 {
     public class UpdateGeographicalDataDto : CreateGeographicalDataDto
     {

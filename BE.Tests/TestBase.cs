@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BE.Data;
-using BE.Domain.Interfaces;
+using BE.Data.Interfaces;
 using BE.Services;
 using BE.Repositories;
-using BE.Domain.Entities;
+using BE.Data.Entities;
 
 namespace BE.Tests;
 

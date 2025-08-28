@@ -1,6 +1,6 @@
 using AutoMapper;
-using BE.Domain.DTOs;
-using BE.Domain.Entities;
+using BE.Data.DTOs;
+using BE.Data.Entities;
 
 namespace BE.Services
 {

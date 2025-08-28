@@ -1,11 +1,11 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using BE.Data;
-using BE.Domain.Interfaces;
-using BE.Domain.Models;
-using BE.Domain.DTOs;
-using BE.Domain.Entities;
-using GeographicalDataModel = BE.Domain.Entities.GeographicalDataEntity;
+using BE.Data.Interfaces;
+using BE.Data.Models;
+using BE.Data.DTOs;
+using BE.Data.Entities;
+using GeographicalDataModel = BE.Data.Entities.GeographicalDataEntity;
 
 namespace BE.Repositories
 {

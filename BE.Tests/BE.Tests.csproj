@@ -23,7 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BE.Web\BE.Web.csproj" />
     <ProjectReference Include="..\BE.Data\BE.Data.csproj" />
-    <ProjectReference Include="..\BE.Domain\BE.Domain.csproj" />
     <ProjectReference Include="..\BE.Services\BE.Services.csproj" />
   </ItemGroup>
 

@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using BE.Domain.Interfaces;
-using BE.Domain.DTOs;
-using BE.Domain.Models;
+using BE.Data.Interfaces;
+using BE.Data.DTOs;
+using BE.Data.Models;
 using Microsoft.Extensions.Logging;
 
 namespace BE.API.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class GeographicalDataController : BaseApiController
     {
         private readonly ILogger<GeographicalDataController> _logger;

@@ -1,7 +1,7 @@
-using BE.Domain.DTOs;
-using BE.Domain.Interfaces;
-using BE.Domain.Models;
-using BE.Domain.Entities;
+using BE.Data.DTOs;
+using BE.Data.Interfaces;
+using BE.Data.Models;
+using BE.Data.Entities;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 

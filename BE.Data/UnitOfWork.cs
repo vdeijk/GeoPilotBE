@@ -1,9 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
-using BE.Data;
-using BE.Domain.Interfaces;
-using BE.Repositories;
+using BE.Data.Interfaces;
 
 namespace BE.Data
 {

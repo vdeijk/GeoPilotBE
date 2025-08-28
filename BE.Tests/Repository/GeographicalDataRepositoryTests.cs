@@ -1,8 +1,8 @@
 using Xunit;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using BE.Domain.Interfaces;
-using BE.Domain.Entities;
+using BE.Data.Interfaces;
+using BE.Data.Entities;
 
 namespace BE.Tests.Repository;
 

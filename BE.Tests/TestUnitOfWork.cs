@@ -1,4 +1,4 @@
-using BE.Domain.Interfaces;
+using BE.Data.Interfaces;
 using BE.Data;
 using Microsoft.Extensions.Logging;
 

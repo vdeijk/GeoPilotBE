@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BE.Domain.Models;
+namespace BE.Data.Models;
 
 public class PagedResult<T>
 {

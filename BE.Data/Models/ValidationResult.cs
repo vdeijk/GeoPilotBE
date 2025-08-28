@@ -1,4 +1,4 @@
-namespace BE.Domain.Models
+namespace BE.Data.Models
 {
     public class ValidationResult
     {

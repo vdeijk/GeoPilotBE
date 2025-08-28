@@ -2,8 +2,8 @@ using Xunit;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using BE.Domain.Interfaces;
-using BE.Domain.DTOs;
+using BE.Data.Interfaces;
+using BE.Data.DTOs;
 
 namespace BE.Tests.Services;
 

@@ -1,4 +1,4 @@
-namespace BE.Domain.Entities
+namespace BE.Data.Entities
 {
     /// <summary>
     /// Entity model for geographical data representing Dutch address and building information.

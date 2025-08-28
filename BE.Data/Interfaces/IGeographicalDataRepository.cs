@@ -1,7 +1,7 @@
-using BE.Domain.Models;
-using BE.Domain.Entities;
+using BE.Data.Models;
+using BE.Data.Entities;
 
-namespace BE.Domain.Interfaces
+namespace BE.Data.Interfaces
 {
     /// <summary>
     /// Repository interface for data access operations on geographical data entities.

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BE.Domain.DTOs
+namespace BE.Data.DTOs
 {
     public class CreateGeographicalDataDto
     {

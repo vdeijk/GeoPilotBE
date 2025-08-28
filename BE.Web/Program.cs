@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using BE.Domain.Interfaces;
+using BE.Data.Interfaces;
 using BE.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -95,10 +95,10 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddScoped<BE.Domain.Interfaces.IGeographicalDataService, BE.Services.GeographicalDataService>();
-builder.Services.AddScoped<BE.Domain.Interfaces.IGeographicalDataRepository, BE.Repositories.GeographicalDataRepository>();
-builder.Services.AddScoped<BE.Domain.Interfaces.IUnitOfWork, BE.Data.UnitOfWork>();
-builder.Services.AddScoped<BE.Domain.Interfaces.IBusinessValidator, BE.Services.BusinessValidator>();
+builder.Services.AddScoped<IGeographicalDataService, GeographicalDataService>();
+builder.Services.AddScoped<IGeographicalDataRepository, BE.Repositories.GeographicalDataRepository>();
+builder.Services.AddScoped<IUnitOfWork, BE.Data.UnitOfWork>();
+builder.Services.AddScoped<IBusinessValidator, BusinessValidator>();
 
 var app = builder.Build();
 

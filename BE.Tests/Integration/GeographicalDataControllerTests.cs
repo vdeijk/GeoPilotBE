@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using System.Net.Http.Json;
 using System.Net;
 using BE.Data;
-using BE.Domain.DTOs;
-using BE.Domain.Entities;
-using BE.Domain.Interfaces;
+using BE.Data.DTOs;
+using BE.Data.Entities;
+using BE.Data.Interfaces;
 
 namespace BE.Tests.Integration;
 

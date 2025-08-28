@@ -26,7 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BE.API\BE.API.csproj" />
     <ProjectReference Include="..\BE.Data\BE.Data.csproj" />
-    <ProjectReference Include="..\BE.Domain\BE.Domain.csproj" />
     <ProjectReference Include="..\BE.Services\BE.Services.csproj" />
   </ItemGroup>
 
