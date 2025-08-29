@@ -108,9 +108,11 @@ namespace BE.Repositories
 
             return new PagedResult<GeographicalDataEntity>
             {
-                        Items = items,
-                        TotalCount = totalCount
-                    };
+                Items = items,
+                TotalCount = totalCount,
+                Page = parameters.Page,
+                PageSize = parameters.PageSize
+            };
                 }
 
 
